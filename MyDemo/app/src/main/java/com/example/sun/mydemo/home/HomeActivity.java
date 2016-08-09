@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sun.mydemo.R;
 import com.example.sun.mydemo.base.BaseActivity;
@@ -184,5 +185,19 @@ public class HomeActivity extends BaseActivity implements ViewPager.OnPageChange
     private void setAnimation(View view) {
         view.setAnimation(mViewAnimationSet);
         view.startAnimation(mViewAnimationSet);
+    }
+
+    //添加点击两次退出
+    private long exitTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+            return;
+        }
+
+        this.finish();
     }
 }
